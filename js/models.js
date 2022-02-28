@@ -85,8 +85,7 @@ class StoryList {
           url: newStory.url,
         },
         // grab the token from localStorage
-        // TODO: figure out how to grab the token from the User class instance instead of localStorage
-        token: localStorage.token
+        token: user.token
       },
     });
     // create a new Story instance from the response

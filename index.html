@@ -37,6 +37,9 @@
   <div class="navbar-brand">
     <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
   </div>
+  <div class="main-nav-links hidden">
+    <a class="nav-link" href="#" id="nav-submit">submit</a>
+  </div>
   <div class="nav-right">
     <a class="nav-link" href="#" id="nav-login">login/signup</a>
     <a class="nav-link" href="#" id="nav-user-profile"></a>
@@ -57,6 +60,25 @@
 
 <!-- Login and signup forms -->
 <section class="account-forms-container container">
+  
+  <!-- Submit form -->
+  <form action="#" id="submit-story-form" class="submit-story-form hidden" method="post">
+    <h4>Submit</h4>
+    <div class="submit-input">
+      <label for="submit-author">author</label>
+      <input id="submit-author" autocomplete="current-author">
+    </div>
+    <div class="submit-input">
+      <label for="submit-title">title</label>
+      <input id="submit-title" autocomplete="current-title">
+    </div>
+    <div class="submit-input">
+      <label for="submit-url">url</label>
+      <input id="submit-url" autocomplete="current-url">
+    </div>
+    <button type="submit">submit</button>
+    <hr>
+  </form>
 
   <!-- Login form -->
   <form action="#" id="login-form" class="account-form hidden" method="post">

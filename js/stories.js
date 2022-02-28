@@ -50,3 +50,28 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
+
+
+// New function: get the data from the form, call the .addStory method
+// you wrote, and then put that new story on the page.
+
+async function addNewStoryToPage(evt) {
+  console.debug("addNewStoryToPage", evt);
+  evt.preventDefault();
+
+  const newStory = {
+    title: $("#submit-title").val(), 
+    author: $("#submit-author").val(),
+    url: $("#submit-url").val()
+  }
+
+  // TODO: figure out how to grab the token from the User class instance instead of localStorage
+  let user = localStorage;
+  await storyList.addStory(user, newStory);
+  
+  getAndShowStoriesOnStart();
+  $submitStoryForm.trigger("reset");
+  $submitStoryForm.hide();
+}
+
+$submitStoryForm.on("submit", addNewStoryToPage);
