@@ -25,6 +25,9 @@ function generateStoryMarkup(story) {
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
+        <span class="star">
+          <i class="far fa-star"></i>
+        </span>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -62,12 +65,11 @@ async function addNewStoryToPage(evt) {
   const newStory = {
     title: $("#submit-title").val(), 
     author: $("#submit-author").val(),
-    url: $("#submit-url").val()
+    url: $("#submit-url").val(),
+    username: currentUser.username,
   }
 
-  // TODO: figure out how to grab the token from the User class instance instead of localStorage
-  let user = localStorage;
-  await storyList.addStory(user, newStory);
+  await storyList.addStory(currentUser, newStory);
   
   getAndShowStoriesOnStart();
   $submitStoryForm.trigger("reset");
@@ -75,3 +77,20 @@ async function addNewStoryToPage(evt) {
 }
 
 $submitStoryForm.on("submit", addNewStoryToPage);
+
+async function toggleFavoriteStatus(e) {
+  let storyId = e.target.parentNode.parentNode.id;
+
+  let star = e.target.parentNode.parentNode.children[0].children[0]
+
+  if (star.className === "far fa-star") {
+    star.className = "fa fa-star"
+    await currentUser.addToFavorites(storyId)
+  } else {
+    star.className = "far fa-star"
+    await currentUser.removeFromFavorites(storyId)
+  }
+
+}
+
+$allStoriesList.on("click", "i", toggleFavoriteStatus);

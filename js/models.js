@@ -83,9 +83,10 @@ class StoryList {
           title: newStory.title,
           author: newStory.author,
           url: newStory.url,
+          username: newStory.username,
         },
         // grab the token from localStorage
-        token: user.token
+        token: user.loginToken
       },
     });
     // create a new Story instance from the response
@@ -208,4 +209,32 @@ class User {
       return null;
     }
   }
+
+  async addToFavorites(story) {
+    this.favorites.push(story);
+
+    const res = await axios({ 
+      url: `${BASE_URL}/users/${this.username}/favorites/${story}`,
+      method: "POST",
+      params: {
+        token: this.loginToken,
+      }
+    });
+
+  }
+
+  async removeFromFavorites(story) {
+    this.favorites = this.favorites.filter(s => s.storyId !== story.storyId)
+    
+    const res = await axios({ 
+      url: `${BASE_URL}/users/${this.username}/favorites/${story}`,
+      method: "DELETE",
+      params: {
+        token: this.loginToken,
+      }
+    });
+
+  }
+
+  
 }
