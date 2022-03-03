@@ -54,6 +54,22 @@ function putStoriesOnPage() {
   $allStoriesList.show();
 }
 
+function putFavoritesOnPage() {
+  console.debug("putStoriesOnPage");
+
+  $favoritesList.empty();
+
+  console.log(currentUser)
+
+  // loop through all of our stories and generate HTML for them
+  for (let story of currentUser.favorites) {
+    const $story = generateStoryMarkup(story);
+    $favoritesList.append($story);
+  }
+
+  $favoritesList.show();
+}
+
 
 // New function: get the data from the form, call the .addStory method
 // you wrote, and then put that new story on the page.
@@ -79,9 +95,10 @@ async function addNewStoryToPage(evt) {
 $submitStoryForm.on("submit", addNewStoryToPage);
 
 async function toggleFavoriteStatus(e) {
-  let storyId = e.target.parentNode.parentNode.id;
-
+  let id = e.target.parentNode.parentNode.id;
   let star = e.target.parentNode.parentNode.children[0].children[0]
+
+  let storyId = storyList.stories.find(story => story.storyId === id)
 
   if (star.className === "far fa-star") {
     star.className = "fa fa-star"
@@ -90,6 +107,8 @@ async function toggleFavoriteStatus(e) {
     star.className = "far fa-star"
     await currentUser.removeFromFavorites(storyId)
   }
+
+  console.log(currentUser.favorites)
 
 }
 

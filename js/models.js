@@ -214,7 +214,7 @@ class User {
     this.favorites.push(story);
 
     const res = await axios({ 
-      url: `${BASE_URL}/users/${this.username}/favorites/${story}`,
+      url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
       method: "POST",
       params: {
         token: this.loginToken,
@@ -227,7 +227,7 @@ class User {
     this.favorites = this.favorites.filter(s => s.storyId !== story.storyId)
     
     const res = await axios({ 
-      url: `${BASE_URL}/users/${this.username}/favorites/${story}`,
+      url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
       method: "DELETE",
       params: {
         token: this.loginToken,
@@ -236,5 +236,5 @@ class User {
 
   }
 
-  
+
 }
