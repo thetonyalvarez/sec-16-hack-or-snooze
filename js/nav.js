@@ -7,9 +7,9 @@
 /** Show main list of all stories when click site name */
 
 function navAllStories(evt) {
-  console.debug("navAllStories", evt);
-  hidePageComponents();
-  putStoriesOnPage();
+	console.debug("navAllStories", evt);
+	hidePageComponents();
+	putStoriesOnPage();
 }
 
 $body.on("click", "#nav-all", navAllStories);
@@ -17,10 +17,10 @@ $body.on("click", "#nav-all", navAllStories);
 /** Show login/signup on click on "login" */
 
 function navLoginClick(evt) {
-  console.debug("navLoginClick", evt);
-  hidePageComponents();
-  $loginForm.show();
-  $signupForm.show();
+	console.debug("navLoginClick", evt);
+	hidePageComponents();
+	$loginForm.show();
+	$signupForm.show();
 }
 
 $navLogin.on("click", navLoginClick);
@@ -28,9 +28,10 @@ $navLogin.on("click", navLoginClick);
 /** Show submit form on click on "submit" */
 
 function submitStoryClick(evt) {
-  console.debug("submitStoryClick", evt);
-  hidePageComponents(); 
-  $submitStoryForm.show();
+	console.debug("submitStoryClick", evt);
+	hidePageComponents();
+	$allStoriesList.show();
+	$submitStoryForm.show();
 }
 
 $navSubmit.on("click", submitStoryClick);
@@ -38,20 +39,42 @@ $navSubmit.on("click", submitStoryClick);
 /** Show favorites */
 
 function navFavoritesClick(evt) {
-  console.debug("navFavoritesClick", evt);
-  hidePageComponents();
-  putFavoritesOnPage();
-  $favoritesList.show();
+	console.debug("navFavoritesClick", evt);
+	hidePageComponents();
+	putFavoritesOnPage();
+	$favoritesList.show();
 }
 
 $navFavorites.on("click", navFavoritesClick);
 
+/** Show own stories */
+
+const navMyStoriesClick = (evt) => {
+	console.debug("navMyStoriesClick", evt);
+	hidePageComponents();
+	putUserStoriesOnPage();
+	$ownStoriesList.show();
+};
+
+$navOwnStories.on("click", navMyStoriesClick);
+
 /** When a user first logins in, update the navbar to reflect that. */
 
 function updateNavOnLogin() {
-  console.debug("updateNavOnLogin");
-  $(".main-nav-links").show();
-  $navLogin.hide();
-  $navLogOut.show();
-  $navUserProfile.text(`${currentUser.username}`).show();
+	console.debug("updateNavOnLogin");
+	$(".main-nav-links").show();
+	$navLogin.hide();
+	$navLogOut.show();
+	$navUserProfile.text(`${currentUser.username}`).show();
 }
+
+/** Show user profile */
+
+const navProfileClick = (evt) => {
+	console.debug("navProfileClick", evt);
+	hidePageComponents();
+	showUserProfile();
+	$userProfileSection.show();
+};
+
+$navUserProfile.on("click", navProfileClick);
