@@ -30,6 +30,10 @@ form > button[type="submit"] {
   width:300px;
 }
 
+/* .main-nav-links { */
+  /* display:flex; */
+/* } */
+
 /* grid-breakpoints: (
   xs: 0,
   sm: 576px,
@@ -52,5 +56,8 @@ form > button[type="submit"] {
     margin-right: 0;
     padding-right:0
 
+  }
+  .main-nav-links {
+    display:block;
   }
 }
