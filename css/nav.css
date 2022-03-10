@@ -12,6 +12,10 @@ nav {
   font-weight: bold;
 }
 
+.navbar-brand img {
+  max-width: 150px;
+}
+
 .nav-link {
   font-size: 0.85rem;
   margin: 0 3px;
@@ -20,4 +24,33 @@ nav {
 .nav-right {
   margin-left: auto;
   text-align: right;
+}
+
+form > button[type="submit"] {
+  width:300px;
+}
+
+/* grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+); */
+
+@media (max-width:767px) {
+  .nav-link {
+    text-align: right;
+  }
+
+  .navbar-brand .nav-link {
+    margin-left: 0;
+    padding-left: 0
+  }
+  .main-nav-links .nav-link, #nav-user-profile, #nav-logout {
+    margin-right: 0;
+    padding-right:0
+
+  }
 }

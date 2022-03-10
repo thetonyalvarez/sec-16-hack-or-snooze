@@ -37,3 +37,45 @@
 .story-user {
   display: block;
 }
+
+/* grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+); */
+
+@media (max-width: 991px) {
+  .story-link {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .stories-list small.story-hostname {
+    display: block;
+  }
+  .stories-list small.story-author {
+    display: inline-block;
+    margin-left:0;
+  }
+  .stories-list small.story-user:before {
+    content: "- "
+  }
+  .stories-list small.story-user {
+    display: inline-block;
+  }
+  .submit-input * {
+    display:block;
+    text-align: left;
+    width:100%;
+  }
+  .submit-story-form button {
+    display: block;
+    width:100%;
+    margin:0;
+    margin-top: 20px
+  }
+}

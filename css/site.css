@@ -121,3 +121,22 @@ form > hr {
     margin: 8px auto;
   }
 }
+
+
+/* BREAKPOINTS: 480px, 768px, 1024px, and 1280px */
+
+@media (max-width:1279px) {
+
+}
+
+@media (max-width:1023px) {
+
+}
+
+@media (max-width:767px) {
+
+}
+
+@media (max-width:479px) {
+
+}
