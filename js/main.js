@@ -12,6 +12,7 @@ const $userProfileSection = $("#user-profile");
 
 const $loginForm = $("#login-form");
 const $signupForm = $("#signup-form");
+const $updateForm = $("#update-profile-form");
 const $submitStoryForm = $("#submit-story-form");
 
 const $navLogin = $("#nav-login");

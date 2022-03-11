@@ -57,7 +57,8 @@ form > button[type="submit"] {
     padding-right:0
 
   }
-  .main-nav-links {
-    display:block;
+
+  .nav-right .nav-link {
+    padding-right:0;
   }
 }

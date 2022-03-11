@@ -123,7 +123,7 @@
 						autocomplete="current-password"
 					/>
 				</div>
-				<button type="submit">login</button>
+				<button class="btn btn-primary" type="submit">login</button>
 				<hr />
 			</form>
 
@@ -151,9 +151,12 @@
 						type="password"
 					/>
 				</div>
-				<button type="submit">create account</button>
+				<button class="btn btn-primary" type="submit">create account</button>
 			</form>
 		</section>
+
+
+
 
 		<!-- User Profile -->
 		<section id="user-profile" class="hidden">
@@ -177,6 +180,37 @@
 						</div>
 					</div>
 				</section>
+
+
+				
+				
+				<!-- Update Profile form -->
+
+				<form
+					action="#"
+					id="update-profile-form"
+					class="update-profile-form"
+					method="post"
+				>
+					<h4 class="h4">Update Profile</h4>
+					<div class="update-profile-input">
+						<label for="update-profile-name">name</label>
+						<input id="update-profile-name" autocapitalize="words" />
+					</div>
+					<!-- <div class="update-profile-input">
+						<label for="update-profile-username">username</label>
+						<input id="update-profile-username" autocomplete="new-username" />
+					</div> -->
+					<div class="update-profile-input">
+						<label for="update-profile-password">password</label>
+						<input
+							id="update-profile-password"
+							autocomplete="update-profile-password"
+							type="password"
+						/>
+					</div>
+					<button class="btn btn-primary" type="submit">Update Profile</button>
+				</form>
 			</div>
 		</section>
 

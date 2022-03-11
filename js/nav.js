@@ -61,6 +61,8 @@ $navOwnStories.on("click", navMyStoriesClick);
 /** When a user first logins in, update the navbar to reflect that. */
 
 function mobileFlexToBlock(tag) {
+	$(tag).removeClass("hidden")
+	// $(tag).show();
 	if (window.matchMedia('(max-width: 767px)').matches) {
 		$(tag).css('display','block')
 	} else if (window.matchMedia('(min-width: 768px)').matches) {

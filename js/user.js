@@ -54,6 +54,44 @@ async function signup(evt) {
 
 $signupForm.on("submit", signup);
 
+/** Handle update profile form submission. */
+
+async function update(evt) {
+	console.debug("update", evt);
+	evt.preventDefault();
+
+	let userData = {
+		name: $("#update-profile-name").val(),
+		username: currentUser.username,
+		password: $("#update-profile-password").val(),
+	};
+	
+	if (!userData.name && !userData.password) {
+		alert("Please enter a value!")
+		return
+	}
+
+	for (let val in userData) {
+		// if the input is empty, remove it from the obj
+		if (!userData[val]) {
+			delete userData[val]
+		}
+	}
+	
+	// User.signup retrieves user info from API and returns User instance
+	// which we'll make the globally-available, logged-in user.
+	currentUser = await User.update(userData);
+
+	console.log(currentUser)
+
+	saveUserCredentialsInLocalStorage();
+	showUserProfile();
+
+	$updateForm.trigger("reset");
+}
+
+$updateForm.on("submit", update);
+
 /** Handle click of logout button
  *
  * Remove their credentials from localStorage and refresh page

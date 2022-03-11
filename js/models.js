@@ -2,6 +2,14 @@
 
 const BASE_URL = "https://hack-or-snooze-v3.herokuapp.com";
 
+const config = {
+	header: {
+		"Access-Control-Allow-Origin" : "*",
+		"Access-Control-Allow-Methods": "OPTIONS,GET,PUT,POST,DELETE,PATCH"
+	}
+}
+
+
 /******************************************************************************
  * Story: a single story in the system
  */
@@ -53,6 +61,7 @@ class StoryList {
 		// query the /stories endpoint (no auth required)
 		const response = await axios({
 			url: `${BASE_URL}/stories`,
+			config,
 			method: "GET",
 		});
 
@@ -75,6 +84,7 @@ class StoryList {
 		console.debug("addStory", newStory);
 		const res = await axios({
 			url: `${BASE_URL}/stories`,
+			config,
 			method: "POST",
 			data: {
 				story: {
@@ -100,6 +110,7 @@ class StoryList {
 		// post to the /stories endpoint
 		const res = await axios({
 			url: `${BASE_URL}/stories/${storyId}`,
+			config,
 			method: "DELETE",
 			data: { token },
 		});
@@ -153,6 +164,7 @@ class User {
 	static async signup(username, password, name) {
 		const response = await axios({
 			url: `${BASE_URL}/signup`,
+			config,
 			method: "POST",
 			data: { user: { username, password, name } },
 		});
@@ -180,6 +192,7 @@ class User {
 	static async login(username, password) {
 		const response = await axios({
 			url: `${BASE_URL}/login`,
+			config,
 			method: "POST",
 			data: { user: { username, password } },
 		});
@@ -198,6 +211,48 @@ class User {
 		);
 	}
 
+	/** Update user with API, make User instance & return it.
+
+   * - username: an existing user's username
+   * - password: an existing user's password
+   */
+
+	static async update(userData) {
+		let test = { token: "here", user: userData }
+		console.log("test", test);
+		console.log("inside the models", userData);
+
+		// console.log("token", currentUser.loginToken);
+
+		const res = await axios({
+			url: `${BASE_URL}/users/${userData.username}`,
+			method: "PATCH",
+			data: { 
+				token: currentUser.loginToken,
+				user: userData,
+			},
+		});
+
+		console.log("response", res)
+
+		let { user } = res.data;
+
+		// console.log("response", user.name)
+
+		return new User(
+			{
+				username: user.username,
+				name: user.name,
+				createdAt: user.createdAt,
+				favorites: user.favorites,
+				ownStories: user.stories,
+			},
+			currentUser.loginToken
+		);
+
+	}
+
+
 	/** When we already have credentials (token & username) for a user,
 	 *   we can log them in automatically. This function does that.
 	 */
@@ -206,6 +261,7 @@ class User {
 		try {
 			const response = await axios({
 				url: `${BASE_URL}/users/${username}`,
+				config,
 				method: "GET",
 				params: { token },
 			});
@@ -246,6 +302,7 @@ class User {
 
 		const res = await axios({
 			url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
+			config,
 			method,
 			params: {
 				token,
