@@ -82,8 +82,6 @@ async function update(evt) {
 	// which we'll make the globally-available, logged-in user.
 	currentUser = await User.update(userData);
 
-	console.log(currentUser)
-
 	saveUserCredentialsInLocalStorage();
 	showUserProfile();
 

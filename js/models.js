@@ -126,6 +126,23 @@ class StoryList {
 			(story) => story.storyId !== storyId
 		);
 	}
+
+	async editStory(user, storyId, author) {
+		const token = currentUser.loginToken;
+
+		// post to the /stories endpoint
+		const res = await axios({
+			url: `${BASE_URL}/stories/${storyId}`,
+			config,
+			method: "PATCH",
+			data: { token, story: {author}},
+			token,
+		});
+
+		const story = new Story(res.data.story);
+		return story;
+
+	}
 }
 
 /******************************************************************************
