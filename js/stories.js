@@ -41,10 +41,10 @@ function generateStoryMarkup(story, showEditBtn = false, showDeleteBtn = false) 
 			<small class="story-user">posted by ${story.username}</small>
 			${story.username == currentUser.username ? `<form
 				class="hidden"
-				id="${story.storyId}"
+				id="form-${story.storyId}"
 				method="post"
 			>
-				<input class="story-author-input">
+				<input id="story-author-input" class="story-author-input">
 				<button class="btn btn-primary" type="submit">Update Author</button>
 			</form>` : ""}
 		</li>
@@ -160,8 +160,13 @@ $ownStoriesList.on("click", ".trash-can i", deleteStory);
 
 // Now, I cannot figure out how to pass the "author" from the form into the function so that the editStory() function can "PATCH" the data in the API and return the updated change to the author field
 
-function updateAuthor(e) {
-	console.dir(e)
+async function updateAuthor() {
+	console.debug("updateAuthor")
+
+	// const newAuthor = {
+	// 	author: $("#story-author-input").val(),
+	// }
+	// console.log(newAuthor),
 
 	// const newStory = {
 	// 	title: $("#submit-title").val(),
@@ -169,9 +174,11 @@ function updateAuthor(e) {
 	// 	author: $("#submit-author").val(),
 	// 	username: currentUser.username,
 	// };
+	
 
-	// const story = await storyList.addStory(currentUser, newStory);
+	// const story = await storyList.editStory(currentUser, newStory);
 
+	// console.debug("updateAuthor > story", story)
 	// const $story = generateStoryMarkup(story);
 
 	// $allStoriesList.prepend($story);
@@ -188,17 +195,29 @@ async function editStory(e) {
 	console.debug("editStory", e);
 	e.preventDefault();
 
-	let story = $(e.target).closest("li")[0];
-	let storyId = story.id;
+	let $story = $(e.target).closest("li")[0];
+	// let $form = $(e.target).closest("form")[0];
+	let $storyId = $story.id;
 
-	updateAuthor(story)
+	// updateAuthor(story)
 
-	// $(story).append(showEditHTML(storyId))
+	const form = $story.children[5]
+	// const $form = $storyId
+	// console.dir($form)
+	$(form).show()
+
+	// console.log($(`${$storyId} form`))
+
+	$($story).on("submit", updateAuthor);
+
+
+
+
 
 	// let author = "tonyauthor4"
 
 	// // remove story from story list
-	// let returnedStory = await storyList.editStory(currentUser, storyId, author);
+	// let returnedStory = await storyList.editStoryAPI(currentUser, storyId, author);
 
 	// console.log("returned author:", returnedStory.author)
 
