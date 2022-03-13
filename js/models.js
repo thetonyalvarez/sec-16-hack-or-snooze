@@ -127,7 +127,7 @@ class StoryList {
 		);
 	}
 
-	async editStory(user, storyId, author) {
+	async editStoryAPI(user, storyId, author) {
 		const token = currentUser.loginToken;
 
 		// post to the /stories endpoint
