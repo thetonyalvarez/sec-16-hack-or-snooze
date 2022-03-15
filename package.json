@@ -1,0 +1,28 @@
+{
+	"name": "hack-or-snooze",
+	"version": "1.0.0",
+	"description": "api test",
+	"main": "index.js",
+	"dependencies": {
+		"jest": "^27.5.1"
+	},
+	"devDependencies": {},
+	"scripts": {
+		"test": "jest"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/thetonyalvarez/sec-16-hack-or-snooze.git"
+	},
+	"keywords": [
+		"hack",
+		"or",
+		"snooze"
+	],
+	"author": "tony alvarez",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/thetonyalvarez/sec-16-hack-or-snooze/issues"
+	},
+	"homepage": "https://github.com/thetonyalvarez/sec-16-hack-or-snooze#readme"
+}
