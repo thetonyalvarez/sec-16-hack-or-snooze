@@ -195,9 +195,7 @@ class User {
 			method: "POST",
 			data: { user: { username, password } },
 		});
-
 		let { user } = response.data;
-
 		return new User(
 			{
 				username: user.username,
