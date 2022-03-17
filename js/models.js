@@ -4,11 +4,10 @@ const BASE_URL = "https://hack-or-snooze-v3.herokuapp.com";
 
 const config = {
 	header: {
-		"Access-Control-Allow-Origin" : "*",
-		"Access-Control-Allow-Methods": "OPTIONS,GET,PUT,POST,DELETE,PATCH"
-	}
-}
-
+		"Access-Control-Allow-Origin": "*",
+		"Access-Control-Allow-Methods": "OPTIONS,GET,PUT,POST,DELETE,PATCH",
+	},
+};
 
 /******************************************************************************
  * Story: a single story in the system
@@ -218,7 +217,7 @@ class User {
    */
 
 	static async update(userData) {
-		let test = { token: "here", user: userData }
+		let test = { token: "here", user: userData };
 		console.log("test", test);
 		console.log("inside the models", userData);
 
@@ -227,13 +226,13 @@ class User {
 		const res = await axios({
 			url: `${BASE_URL}/users/${userData.username}`,
 			method: "PATCH",
-			data: { 
+			data: {
 				token: currentUser.loginToken,
 				user: userData,
 			},
 		});
 
-		console.log("response", res)
+		console.log("response", res);
 
 		let { user } = res.data;
 
@@ -249,9 +248,7 @@ class User {
 			},
 			currentUser.loginToken
 		);
-
 	}
-
 
 	/** When we already have credentials (token & username) for a user,
 	 *   we can log them in automatically. This function does that.
