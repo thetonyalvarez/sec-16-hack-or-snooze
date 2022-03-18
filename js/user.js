@@ -19,15 +19,26 @@ async function login(evt) {
 
 	// User.login retrieves user info from API and returns User instance
 	// which we'll make the globally-available, logged-in user.
-	currentUser = await User.login(username, password);
+	try {
+		currentUser = await User.login(username, password);
 
-	$loginForm.trigger("reset");
+		$loginForm.trigger("reset");
 
-	saveUserCredentialsInLocalStorage();
-	updateUIOnUserLogin();
-	putStoriesOnPage();
-	$loginForm.hide();
-	$signupForm.hide();
+		saveUserCredentialsInLocalStorage();
+		updateUIOnUserLogin();
+		putStoriesOnPage();
+		$loginForm.hide();
+		$signupForm.hide();
+	} catch (err) {
+		$(".error-message").remove();
+		console.log("error in login function", err);
+		$("#login-password")
+			.closest("form")
+			.append(
+				"<div class='error-message' style='color:red'>Invalid credentials. Please try again.</div>"
+			);
+		return;
+	}
 }
 
 $loginForm.on("submit", login);
@@ -44,12 +55,16 @@ async function signup(evt) {
 
 	// User.signup retrieves user info from API and returns User instance
 	// which we'll make the globally-available, logged-in user.
-	currentUser = await User.signup(username, password, name);
+	try {
+		currentUser = await User.signup(username, password, name);
 
-	saveUserCredentialsInLocalStorage();
-	updateUIOnUserLogin();
+		saveUserCredentialsInLocalStorage();
+		updateUIOnUserLogin();
 
-	$signupForm.trigger("reset");
+		$signupForm.trigger("reset");
+	} catch (err) {
+		console.log("ERROR");
+	}
 }
 
 $signupForm.on("submit", signup);
@@ -65,24 +80,24 @@ async function update(evt) {
 		username: currentUser.username,
 		password: $("#update-profile-password").val(),
 	};
-	
+
 	if (!userData.name && !userData.password) {
-		alert("Please enter a value!")
-		return
+		alert("Please enter a value!");
+		return;
 	}
 
 	for (let val in userData) {
 		// if the input is empty, remove it from the obj
 		if (!userData[val]) {
-			delete userData[val]
+			delete userData[val];
 		}
 	}
-	
+
 	// User.signup retrieves user info from API and returns User instance
 	// which we'll make the globally-available, logged-in user.
 	currentUser = await User.update(userData);
 
-	console.log(currentUser)
+	console.log(currentUser);
 
 	saveUserCredentialsInLocalStorage();
 	showUserProfile();
